@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page_title %}{{menu_title}}{% endblock %}
+
+{% block title %}
+	<div class="col-12">
+		<div class="h1 m-0">{{menu_title|upper}}</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+    {# Static paths #}
+    {% static 'images' as img_url %}
+
+    <div class="container mt-5">
+        <div class="row">
+            {% for target in targets %}
+                <div class="bg-col col-lg-4 col-md-6 col-sm-6">
+                    <div class="card bg-col div-sty">
+                        <label for="ckkbox">
+                            <img
+                                class="d-none d-sm-block"
+                                id="menu_img"
+                                src="{{img_url}}/{{target.src}}1.png" alt="error"
+                                onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{target.src}}1.png') ? '{{img_url}}/{{target.src}}2.png' : '{{img_url}}/{{target.src}}1.png');"
+                            />
+                        </label>
+                        <label for="chkbox" class="switch d-block d-sm-none">
+                            <input type="checkbox" id="chkbox" />
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="d-block" id="room_name">{{target.name}}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block title %}
+<div class="row">
+    <div class="h1 p-2">Sign into your account</div>
+</div>
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-2"></div>
+    <div class="col-lg-4 col-md-4 col-sm-8">
+        <form class="bg-col" action="" method="post" autocomplete="off">
+            {% csrf_token %}
+            {% for message in messages %}
+                <h5 class="alert-danger text-center">{{message}}</h5>
+            {% endfor %}
+            <div class="form-row input-field">
+                <input type="text" name="username" />
+                <span data-placeholder="Username"></span>
+            </div>
+            <div class="form-row input-field">
+                <input type="password" name="password" />
+                <span data-placeholder="Password"></span>
+            </div>
+            <div class="form-row btn-custom">
+                <input type="submit" value="login" class="btn1" />
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-2"></div>
+</div>
+{% endblock %}
