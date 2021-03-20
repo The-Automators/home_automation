@@ -12,7 +12,7 @@ def home(req):
     t[3].name, t[3].src = ['bulb', 'bulb1']
     t[4].name, t[4].src = ['door', 'door1']
     t[5].name, t[5].src = ['fan', 'fan1']
-    return render(req, 'home.html', {'arrow' : False, 'targets': t}) #if req.user.is_authenticated else redirect('/')
+    return render(req, 'home.html', {'arrow' : False, 'targets': t})
 
 def menu(req, id):
     if not req.user.is_authenticated: return redirect('/')
@@ -26,15 +26,8 @@ def menu(req, id):
         t[4].name = 'drawing room'.capitalize()
         t[5].name = 'dining area'.capitalize()
         return render(req, 'menu.html', {'menu_title' : id.title(), 'arrow' : True, 'targets' : t})
-    else:
-        if id == 'camera':
-            return render(req, '')
-        elif id == 'temperature':
-            return render(req, '')
-        elif id == 'fan':
-            return render(req, '')
-        elif id == 'ac':
-            return render(req, '')
+    if id in ['camera', 'temperature']:
+        return render(req, 'menu2.html', {'menu_title' : id.title(), 'arrow' : True})
     return redirect('home')
 
 def logout(req):

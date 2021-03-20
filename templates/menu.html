@@ -5,7 +5,7 @@
 
 {% block title %}
 	<div class="col-12">
-		<div class="h1 m-0">{{menu_title|upper}}</div>
+		<div class="h1 m-0 text-uppercase">{{menu_title}}</div>
 	</div>
 {% endblock %}
 
@@ -20,14 +20,14 @@
                     <div class="card bg-col div-sty">
                         <label for="ckkbox">
                             <img
-                                class="d-none d-sm-block"
+                                class="d-none d-sm-block h-50"
                                 id="menu_img"
                                 src="{{img_url}}/{{target.src}}1.png" alt="error"
                                 onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{target.src}}1.png') ? '{{img_url}}/{{target.src}}2.png' : '{{img_url}}/{{target.src}}1.png');"
                             />
                         </label>
-                        <label for="chkbox" class="switch d-block d-sm-none">
-                            <input type="checkbox" id="chkbox" />
+                        <label for="chkbox{{forloop.counter}}" class="switch d-block d-sm-none">
+                            <input type="checkbox" id="chkbox{{forloop.counter}}" />
                             <span class="slider round"></span>
                         </label>
                         <span class="d-block" id="room_name">{{target.name}}</span>

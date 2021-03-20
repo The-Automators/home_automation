@@ -261,16 +261,16 @@ body #h1, body .h1, body .h4 {
   color: #000;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
   #logout {
-    top: -5px;
+    position: absolute;
   }
 }
 
 #menu_img {
   position: absolute;
   top: 50%;
-  right: 25%;
+  right: 30%;
   -webkit-transform: translate(50%, -50%);
           transform: translate(50%, -50%);
 }

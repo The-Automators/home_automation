@@ -241,15 +241,17 @@ body {
             color: #000;
         }
     }
-    @media (max-width: 450px) {
+    @media (max-width: 480px) {
         & {
-            top: -5px;
+            position: absolute;
+            // bottom: 50px;
+            // right: 20px;
         }
     }
 }
 #menu_img {
     position: absolute;
     top: 50%;
-    right:25%;
+    right:30%;
     transform: translate(50%, -50%);
 }
