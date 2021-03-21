@@ -27,7 +27,7 @@ def menu(req, id):
         t[5].name = 'dining area'.capitalize()
         return render(req, 'menu.html', {'menu_title' : id.title(), 'arrow' : True, 'targets' : t})
     if id in ['camera', 'temperature']:
-        return render(req, 'menu2.html', {'menu_title' : id.title(), 'arrow' : True})
+        return render(req, 'menu2.html', {'menu_title' : id.title(), 'arrow' : True, 'temperature' : 30})
     return redirect('home')
 
 def logout(req):

@@ -10,12 +10,16 @@
 
 {% block content %}
     <div class="container bg-col">
-        <div class="row p-2">
+        <div class="row p-2 mt-3">
             <div class="col-12 card bg-col">
                 {% if menu_title == "Camera" %}
                     <h1>Camera working</h1>
                 {% else %}
-                    <h1>Temperature working</h1>
+                    <div class="gauge d-none d-md-block" data-digit={{temperature}}>
+                        <div class="gauge-outer"></div>
+                        <div class="gauge-inner"></div>
+                        <div class="gauge-digits"></div>
+                    </div>
                 {% endif %}
             </div>
         </div>

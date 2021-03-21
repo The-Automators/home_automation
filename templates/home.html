@@ -1,6 +1,8 @@
 {% extends 'index.html' %} 
 {% load static %} 
+
 {% block page_title %}Home{% endblock page_title %} 
+
 {% block title %}
 	<div class="col-12">
 		<div class="h1">HOME AUTOMATION</div>
@@ -10,10 +12,10 @@
 		<a id="logout" href="logout"><button class="btn1">logout</button></a>
 	</div>
 {% endblock title %} 
+
 {% block content %} 
 	{# Static paths #} 
 	{% static 'images' as img_url %}
-
 	<div class="container mt-5">
 		<div class="row">
 			{% for target in targets %}

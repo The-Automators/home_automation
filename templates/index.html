@@ -8,19 +8,19 @@
     <link rel="shortcut icon" href="{% static '/images/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-    <title>Home Automation | {% block page_title %}{% endblock %}</title>
+    <title>Home Automation | {% block page_title %}{% endblock page_title %}</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row bg-col" style="height: 85px;">
-            {% block title %}{% endblock %}
+            {% block title %}{% endblock title %}
         </div>
         {% if arrow %}
         <div>
             <a href="/home"><img id="arrow" src="{% static '/images/arrow.png' %}" alt="error"></a>
         </div>
         {% endif %}
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
     </div>
     <script src="{% static '/js/bootstrap.bundle.js' %}"></script>
     <script src="{% static '/js/jquery-3.5.1.js' %}"></script>
