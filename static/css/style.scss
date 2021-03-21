@@ -243,9 +243,7 @@ body {
     }
     @media (max-width: 480px) {
         & {
-            position: absolute;
-            // bottom: 50px;
-            // right: 20px;
+            top: -10px;
         }
     }
 }

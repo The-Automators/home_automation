@@ -12,10 +12,10 @@
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-2"></div>
     <div class="col-lg-4 col-md-4 col-sm-8">
-        <form class="bg-col" action="" method="post" autocomplete="off">
+        <form class="bg-col" action="" method="post" autocomplete="off" style="min-height: 250px; height: auto;">
             {% csrf_token %}
             {% for message in messages %}
-                <h5 class="alert-danger text-center">{{message}}</h5>
+                <h5 class="card alert-danger text-center mx-5 text-wrap">{{message}}</h5>
             {% endfor %}
             <div class="form-row input-field">
                 <input type="text" name="username" />
@@ -26,7 +26,7 @@
                 <span data-placeholder="Password"></span>
             </div>
             <div class="form-row btn-custom">
-                <input type="submit" value="login" class="btn1" />
+                <input type="submit" value="login" class="btn1" style="margin-bottom: 20px"/>
             </div>
         </form>
     </div>
