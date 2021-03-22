@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{% static '/images/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    {% block css %}{% endblock css %}
     <title>Home Automation | {% block page_title %}{% endblock page_title %}</title>
 </head>
 <body>

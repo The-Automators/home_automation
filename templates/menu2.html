@@ -1,27 +1,29 @@
 {% extends 'index.html' %}
+{% load static %}
+
 
 {% block page_title %}{{menu_title | title}}{% endblock page_title %}
 
 {% block title %}
-	<div class="col-12">
-		<div class="h1 m-0 text-uppercase">{{menu_title}}</div>
-	</div>
+<div class="col-12">
+    <div class="h1 m-0 text-uppercase">{{menu_title}}</div>
+</div>
 {% endblock title %}
 
 {% block content %}
-    <div class="container card bg-col mt-3">
-        <div class="row p-2 ">
-            <div class="col-12 ">
-                {% if menu_title == "camera" %}
-                    <img class="position-relative start-50 translate-middle-x w-75" src="{% url 'video_feed' %}" alt="error">
-                {% else %}
-                    <div class="gauge d-none d-md-block" data-digit={{temperature}}>
-                        <div class="gauge-outer"></div>
-                        <div class="gauge-inner"></div>
-                        <div class="gauge-digits"></div>
-                    </div>
-                {% endif %}
+<div class="container card bg-col mt-3">
+    <div class="row p-2 ">
+        <div class="col-12 ">
+            {% if menu_title == "camera" %}
+            <img class="position-relative start-50 translate-middle-x w-75" src="{% url 'video_feed' %}" alt="error">
+            {% else %}
+            <div class="gauge d-none d-md-block" data-digit={{temperature}}>
+                <div class="gauge-outer"></div>
+                <div class="gauge-inner"></div>
+                <div class="gauge-digits"></div>
             </div>
+            {% endif %}
         </div>
     </div>
+</div>
 {% endblock content %}
