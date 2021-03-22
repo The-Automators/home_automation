@@ -13,7 +13,7 @@
         <div class="row p-2 ">
             <div class="col-12 ">
                 {% if menu_title == "camera" %}
-                    <h1 class="text-light">Camera working</h1>
+                    <img class="position-relative start-50 translate-middle-x w-75" src="{% url 'video_feed' %}" alt="error">
                 {% else %}
                     <div class="gauge d-none d-md-block" data-digit={{temperature}}>
                         <div class="gauge-outer"></div>

@@ -7,8 +7,3 @@ class Menu(models.Model):
 class SubMenu(models.Model):
     name = models.CharField(max_length=55)
     status = models.BooleanField(default=False)
-
-class Target:
-    id: int
-    name: str
-    src: str
