@@ -1,38 +1,45 @@
-{% extends 'index.html' %} 
-{% load static %} 
+{% extends 'index.html' %} {# joining this page with mian page #}
+{% load static %} {# loading static files like -> images, css & scripts #}
 
-{% block page_title %}Home{% endblock page_title %} 
+{% block page_title %}Home{% endblock page_title %} {# page title shown in navbar #}
 
-{% block title %}
-	<div class="col-12">
-		<div class="h1">HOME AUTOMATION</div>
-	</div>
-	<div class="col-12">
-		<div class="h4 m-0">CUIRCIT BOARD</div>
-		<a id="logout" href="logout"><button class="btn1">logout</button></a>
-	</div>
+{% block title %} {# page title shown in header #}
+<div class="col-12">
+	<div class="h1">HOME AUTOMATION</div>
+</div>
+<div class="col-12">
+	<div class="h4 m-0">CUIRCIT BOARD</div>
+	<a id="logout" href="logout"><button class="btn1">logout</button></a>
+</div>
 {% endblock title %} 
 
-{% block content %} 
-	{# Static paths #} 
-	{% static 'images' as img_url %}
-	<div class="container mt-5">
-		<div class="row">
-			{% for target in targets %}
-			<div class="bg-col col-lg-4 col-md-6 col-sm-6">
-				<a href="menu/{{target.name}}" style="color: #fff">
-					<div class="card bg-col div-sty">
-						<cite data-placement="top" data-toggle="tooltip" title="{{target.name | upper}}">
-						<img 
-							class="position-absolute h-75 top-50 start-50 translate-middle d-none d-sm-block"
-							src="{{img_url}}/{{target.name}}.png" alt="error" 
-						/>
-						</cite>
-						<span class="d-block d-sm-none" id="room_name">{{target.name}}</span>
-					</div>
-				</a>
-			</div>
-			{% endfor %}
+{% block content %} {# main content #}
+{% static 'images' as img_url %} {# Static paths for images #}
+<div class="container mt-5">
+	<div class="row">
+		{% for target in targets %}
+		<div class="bg-col col-lg-4 col-md-6 col-sm-6">
+			<a href="menu/{{target.name}}" style="color: #fff">
+				<div class="card bg-col div-sty">
+					<cite data-placement="top" data-toggle="tooltip" title="{{target.name | upper}}">
+					<img 
+						class="position-absolute h-75 top-50 start-50 translate-middle d-none d-sm-block"
+						src="{{img_url}}/{{target.name}}.png" alt="error" 
+					/>
+					</cite>
+					<span class="d-block d-sm-none" id="room_name">{{target.name}}</span>
+				</div>
+			</a>
 		</div>
+		{% endfor %}
 	</div>
+</div>
 {% endblock content %}
+
+{% block script %} {# script for login placeholder animation #}
+<script>
+	$(document).ready(() => {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
+{% endblock script %} 

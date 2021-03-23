@@ -267,7 +267,7 @@ body #h1, body .h1, body .h4 {
   }
 }
 
-#menu_img {
+.menu_img {
   position: absolute;
   top: 50%;
   right: 30%;

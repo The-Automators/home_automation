@@ -2,17 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth
 from django.http import HttpResponse
 from django.http.response import StreamingHttpResponse
-from home.camera import VideoCapture
+# local dir import
+from home.camera import VideoCapture 
 from home.models import Menu, SubMenu
 
 # Create your views here.
+# menu page renderer
 home = lambda req: redirect('/') if not req.user.is_authenticated else render(req, 'home.html', {'arrow' : False, 'targets': Menu.objects.all()})
 
-def gen(cam):
-    while True: yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + cam.get_frame() + b'\r\n\r\n')
-
-video_feed = lambda req: StreamingHttpResponse(gen(VideoCapture()), content_type='multipart/x-mixed-replace; boundary=frame')
-
+# submenu page renderer
 def menu(req, id):
     if not req.user.is_authenticated: return redirect('/')
     if id in ['bulb', 'door', 'fan', 'ac']:
@@ -22,6 +20,14 @@ def menu(req, id):
         return render(req, 'menu2.html', {'menu_title' : id, 'arrow' : True, 'temperature' : 30})
     return redirect('home')
 
+# generating camera frame 
+def gen(cam):
+    while True: yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + cam.get_frame() + b'\r\n\r\n')
+
+# sending camera feed back
+video_feed = lambda req: StreamingHttpResponse(gen(VideoCapture()), content_type='multipart/x-mixed-replace; boundary=frame')
+
+# user logout 
 def logout(req):
     auth.logout(req)
     return redirect('/')

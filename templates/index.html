@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {# loading static files like -> images, css & scripts #}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,23 +8,22 @@
     <link rel="shortcut icon" href="{% static '/images/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-    {% block css %}{% endblock css %}
-    <title>Home Automation | {% block page_title %}{% endblock page_title %}</title>
+    <title>Home Automation | {% block page_title %} {# block for page title #} {% endblock page_title %}</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row bg-col" style="min-height:85px;height:auto;">
-            {% block title %}{% endblock title %}
+            {% block title %} {# block for main header #} {% endblock title %}
         </div>
-        {% if arrow %}
+        {% if arrow %} {# back arrwo is added when you are inside of sub menu #}
         <div>
             <a href="/home"><img id="arrow" src="{% static '/images/arrow.png' %}" alt="error"></a>
         </div>
         {% endif %}
-        {% block content %}{% endblock content %}
+        {% block content %} {# block for main content #} {% endblock content %}
     </div>
     <script src="{% static '/js/bootstrap.bundle.js' %}"></script>
     <script src="{% static '/js/jquery-3.5.1.js' %}"></script>
-    <script src="{% static '/js/script.js' %}"></script>
+    {% block script %} {# block for extra scripts #} {% endblock script %} 
 </body>
 </html>

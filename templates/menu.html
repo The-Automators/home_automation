@@ -1,38 +1,54 @@
-{% extends 'index.html' %}
-{% load static %}
+{% extends 'index.html' %} {# joining this page with mian page #}
+{% load static %} {# loading static files like -> images, css & scripts #}
 
-{% block page_title %}{{menu_title}}{% endblock %}
+{% block page_title %}{{menu_title | title}}{% endblock %} {# page title shown in navbar #}
 
-{% block title %}
-	<div class="col-12">
-		<div class="h1 m-0 text-uppercase">{{menu_title}}</div>
-	</div>
+{% block title %} {# page title shown in header #}
+<div class="col-12">
+    <div class="h1 m-0 text-uppercase">{{menu_title}}</div>
+</div>
 {% endblock %}
 
-{% block content %}
-    {# Static paths #}
-    {% static 'images' as img_url %}
-    <div class="container mt-5">
-        <div class="row">
-            {% for target in targets %}
-                <div class="bg-col col-lg-4 col-md-6 col-sm-6">
-                    <div class="card bg-col div-sty">
-                        <label for="ckkbox{{forloop.counter}}">
-                            <img
-                                class="d-none d-sm-block h-75"
-                                id="menu_img"
-                                src="{{img_url}}/{{menu_title}}.png" alt="error"
-                                onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}.png') ? '{{img_url}}/{{menu_title}}1.png' : '{{img_url}}/{{menu_title}}.png');"
-                            />
-                        </label>
-                        <label for="chkbox{{forloop.counter}}" class="switch d-block d-sm-none">
-                            <input type="checkbox" id="chkbox{{forloop.counter}}" />
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="d-block" id="room_name">{{target.name}}</span>
-                    </div>
+{% block content %} {# main content #}
+{% static 'images' as img_url %} {# Static paths for images #}
+<div class="container mt-5">
+    <div class="row">
+        {% for target in targets %} {# main loop dynamic content showing #}
+            <div class="bg-col col-lg-4 col-md-6 col-sm-6">
+                <div class="card bg-col div-sty">
+                    <img
+                        class="d-none d-sm-block h-75 menu_img"
+                        id="menu_img{{forloop.counter}}"
+                        src="{{img_url}}/{{menu_title}}.png" alt="error"
+                        onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}.png') ? '{{img_url}}/{{menu_title}}1.png' : '{{img_url}}/{{menu_title}}.png');" 
+                        /> {# this jQuery changes the image in this block #}
+                    <label for="chkbox{{forloop.counter}}" class="switch d-block d-sm-none">
+                        <input type="checkbox" id="chkbox{{forloop.counter}}" />
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="d-block" id="room_name">{{target.name}}</span>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
-{% endblock %}
+</div>
+{% endblock content %}
+
+{% block script %} {# script for on and off button #}
+<script>
+    $(document).ready(() => {
+        $('#chkbox1').click(function () {
+            $.ajax({
+                url: 'checkbox1',
+                type: "POST",
+                success: function(r) {
+                    console.log(`Result: ${r}`);
+                },
+                error: function(e) {
+                    console.log(`Error: ${e}`);
+                }
+            });
+        });
+    });
+</script>
+{% endblock script %} 

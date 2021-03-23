@@ -1,20 +1,20 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {# joining this page with mian page #}
 
-{% block page_title %}Login{% endblock %}
+{% block page_title %}Login{% endblock %} {# page title shown in navbar #}
 
-{% block title %}
+{% block title %} {# page title shown in header #}
 <div class="row">
     <div class="h1 p-2 text-uppercase">Sign into your account</div>
 </div>
 {% endblock title %}
 
-{% block content %}
+{% block content %} {# main content #}
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-2"></div>
     <div class="col-lg-4 col-md-4 col-sm-8">
         <form class="bg-col" action="" method="post" autocomplete="off" style="min-height: 250px; height: auto;">
-            {% csrf_token %}
-            {% for message in messages %}
+            {% csrf_token %} {# CSRF token is for sending data from a form #}
+            {% for message in messages %} {# if there is a error shown here #}
                 <h5 class="card alert-danger text-center mx-5 text-wrap">{{message}}</h5>
             {% endfor %}
             <div class="form-row input-field">
@@ -33,3 +33,15 @@
     <div class="col-lg-4 col-md-4 col-sm-2"></div>
 </div>
 {% endblock %}
+
+{% block script %} {# script for login placeholder animation #}
+<script>
+    $(".input-field input").on("focus",function(){
+        $(this).addClass("focus");
+    });
+    $(".input-field input").on("blur",function(){
+        if($(this).val() == "")
+        $(this).removeClass("focus");
+    });
+</script>
+{% endblock script %} 
