@@ -16,16 +16,18 @@
         {% for target in targets %} {# main loop dynamic content showing #}
             <div class="bg-col col-lg-4 col-md-6 col-sm-6">
                 <div class="card bg-col div-sty">
-                    <img
-                        class="d-none d-sm-block h-75 menu_img"
-                        id="menu_img{{forloop.counter}}"
-                        src="{{img_url}}/{{menu_title}}.png" alt="error"
-                        onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}.png') ? '{{img_url}}/{{menu_title}}1.png' : '{{img_url}}/{{menu_title}}.png');" 
+                    <a href="menu/{{menu_title}}/{{forloop.counter}}">
+                        <img
+                            class="d-none d-sm-block h-75 menu_img"
+                            id="menu_img{{forloop.counter}}"
+                            src="{{img_url}}/{{menu_title}}.png" alt="error"
+                            onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}.png') ? '{{img_url}}/{{menu_title}}1.png' : '{{img_url}}/{{menu_title}}.png');" 
                         /> {# this jQuery changes the image in this block #}
-                    <label for="chkbox{{forloop.counter}}" class="switch d-block d-sm-none">
-                        <input type="checkbox" id="chkbox{{forloop.counter}}" />
-                        <span class="slider round"></span>
-                    </label>
+                        <a href="menu/{{menu_title}}/{{forloop.counter}}" class="switch d-block d-sm-none">
+                            <input type="checkbox" value="{{target.name}}" />
+                            <span class="slider round"></span>
+                        </a>
+                    </a>
                     <span class="d-block" id="room_name">{{target.name}}</span>
                 </div>
             </div>
@@ -33,22 +35,3 @@
     </div>
 </div>
 {% endblock content %}
-
-{% block script %} {# script for on and off button #}
-<script>
-    $(document).ready(() => {
-        $('#chkbox1').click(function () {
-            $.ajax({
-                url: 'checkbox1',
-                type: "POST",
-                success: function(r) {
-                    console.log(`Result: ${r}`);
-                },
-                error: function(e) {
-                    console.log(`Error: ${e}`);
-                }
-            });
-        });
-    });
-</script>
-{% endblock script %} 
