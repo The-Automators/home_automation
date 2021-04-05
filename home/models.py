@@ -21,3 +21,6 @@ class Device(models.Model):
     fan = models.IntegerField(default=-1)
     ac = models.IntegerField(default=-1)
     door = models.IntegerField(default=-1)
+
+    def __str__(self):
+        return self.room.name

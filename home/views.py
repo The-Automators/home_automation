@@ -16,24 +16,39 @@ def menu(req, id):
     if id in ['bulb', 'door', 'fan', 'ac']:
         if id == 'bulb': 
             row = Device.objects.exclude(bulb = -1)
-            data = ["true" if x.bulb == 1 else "false" for x in row]
+            data = ["checked" if x.bulb == 1 else "" for x in row]
         elif id == 'door': 
             row = Device.objects.exclude(door = -1)
-            data = ["true" if x.bulb == 1 else "false" for x in row]
+            data = ["checked" if x.door == 1 else "" for x in row]
         elif id == 'fan': 
             row = Device.objects.exclude(fan = -1)
-            data = ["true" if x.bulb == 1 else "false" for x in row]
+            data = ["checked" if x.fan == 1 else "" for x in row]
         elif id == 'ac': 
             row = Device.objects.exclude(ac = -1)
-            data = ["true" if x.bulb == 1 else "false" for x in row]
+            data = ["checked" if x.ac == 1 else "" for x in row]
         room = [x.room for x in row]
-        return render(req, 'menu.html', {'menu_title' : id, 'arrow' : True, 'data' : zip(room, data)})
+        _id = [x.id for x in row]
+        return render(req, 'menu.html', {'menu_title' : id, 'arrow' : True, 'data' : zip(room, data, _id)})
     if id in ['camera', 'temperature']:
         return render(req, 'menu2.html', {'menu_title' : id, 'arrow' : True, 'temperature' : 30})
     return redirect('home')
 
+# data feedback from the database and ardiuno
 def data(req, id):
-    print(id, req.GET['id'], req.GET['status'])
+    _id = req.GET['id'][1 if req.GET['id'].startswith('c') else 0:]
+    status = req.GET['status']
+    value = 1 if status == 'true' else 0
+    obj = Device.objects.get(id=_id)
+    if id == 'bulb': 
+        obj.bulb = value
+    elif id == 'door': 
+        obj.door = value
+    elif id == 'fan': 
+        obj.fan = value
+    elif id == 'ac': 
+        obj.ac = value
+    obj.save()
+    print(id, _id, status, obj.bulb, obj.door, obj.fan, obj.ac)
     return redirect(f'/home/menu/{id}')
 
 # generating camera frame 
