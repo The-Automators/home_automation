@@ -23,7 +23,7 @@
                         onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}_.png') ? '{{img_url}}/{{menu_title}}_checked.png' : '{{img_url}}/{{menu_title}}_.png');" 
                     /> {# this jQuery changes the image in this block #}
                     <label class="switch d-block d-sm-none">
-                        <input type="checkbox" value="{{room}}" id="c{{id}}"/>
+                        <input type="checkbox" value="{{room}}" id="c{{id}}" {{status}}/>
                         <span class="slider round"></span>
                     </label>
                     <span class="d-block" id="room_name">{{room}}</span>
