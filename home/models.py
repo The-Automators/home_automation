@@ -1,11 +1,23 @@
 from django.db import models
 
-# Create your models here.
 # model for menu database
 class Menu(models.Model):
     name = models.CharField(max_length=55)
 
-# model for submenu database
-class SubMenu(models.Model):
+    def __str__(self):
+        return self.name
+
+# model for menu database
+class Room(models.Model):
     name = models.CharField(max_length=55)
-    status = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.name
+
+# referance table for rooms
+class Device(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    bulb = models.IntegerField(default=-1)
+    fan = models.IntegerField(default=-1)
+    ac = models.IntegerField(default=-1)
+    door = models.IntegerField(default=-1)

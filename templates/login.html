@@ -1,6 +1,6 @@
 {% extends 'index.html' %} {# joining this page with mian page #}
 
-{% block page_title %}Login{% endblock %} {# page title shown in navbar #}
+{% block page_title %}Login{% endblock page_title %} {# page title shown in navbar #}
 
 {% block title %} {# page title shown in header #}
 <div class="row">
@@ -32,7 +32,7 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-2"></div>
 </div>
-{% endblock %}
+{% endblock content %}
 
 {% block script %} {# script for login placeholder animation #}
 <script>

@@ -1,37 +1,61 @@
 {% extends 'index.html' %} {# joining this page with mian page #}
 {% load static %} {# loading static files like -> images, css & scripts #}
 
-{% block page_title %}{{menu_title | title}}{% endblock %} {# page title shown in navbar #}
+{% block page_title %}{{menu_title | title}}{% endblock page_title %} {# page title shown in navbar #}
 
 {% block title %} {# page title shown in header #}
 <div class="col-12">
     <div class="h1 m-0 text-uppercase">{{menu_title}}</div>
 </div>
-{% endblock %}
+{% endblock title %}
 
 {% block content %} {# main content #}
 {% static 'images' as img_url %} {# Static paths for images #}
 <div class="container mt-5">
-    <div class="row">
-        {% for target in targets %} {# main loop dynamic content showing #}
-            <div class="bg-col col-lg-4 col-md-6 col-sm-6">
+    <div id="parent" class="row">
+        {% for room, status in data %} {# main loop dynamic content showing #}
+            <div class="bg-col col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="card bg-col div-sty">
-                    <a href="menu/{{menu_title}}/{{forloop.counter}}">
-                        <img
-                            class="d-none d-sm-block h-75 menu_img"
-                            id="menu_img{{forloop.counter}}"
-                            src="{{img_url}}/{{menu_title}}.png" alt="error"
-                            onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}.png') ? '{{img_url}}/{{menu_title}}1.png' : '{{img_url}}/{{menu_title}}.png');" 
-                        /> {# this jQuery changes the image in this block #}
-                        <a href="menu/{{menu_title}}/{{forloop.counter}}" class="switch d-block d-sm-none">
-                            <input type="checkbox" value="{{target.name}}" />
-                            <span class="slider round"></span>
-                        </a>
-                    </a>
-                    <span class="d-block" id="room_name">{{target.name}}</span>
+                    <img
+                        class="d-none d-sm-block h-50 menu_img"
+                        id="menu_img{{forloop.counter}}"
+                        src="{{img_url}}/{{menu_title}}_{{status}}.png" alt="error"
+                        onclick="$(this).attr('src', $(this).attr('src').match('{{img_url}}/{{menu_title}}_false.png') ? '{{img_url}}/{{menu_title}}_true.png' : '{{img_url}}/{{menu_title}}_false.png');" 
+                    /> {# this jQuery changes the image in this block #}
+                    <label href="menu/{{menu_title}}/{{forloop.counter}}" class="switch d-block d-sm-none">
+                        <input type="checkbox" value="{{room}}" id="chkbox{{forloop.counter}}"/>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="d-block" id="room_name">{{room}}</span>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
 {% endblock content %}
+
+{% block script %}
+{# check function for initialy update the view from database #}
+<script>
+    $('#parent').on('click', (e)=>{
+        //console.log(e.target.tagName);
+        if(e.target.tagName==="INPUT" || e.target.tagName ==='IMG') {
+            var ele_id = e.target.id;
+            if(e.target.tagName==="INPUT"){
+                var status = $(`#${ele_id}`).is(':checked');
+            } else {
+                var status = $(`#${ele_id}`).attr('src').match('{{img_url}}/{{menu_title}}_false.png') ? false : true;
+            }
+            $.ajax({
+                url: '{{menu_title}}/data',
+                type: "GET",
+                data: {
+                    "id": ele_id,
+                    "status" : status
+                },
+                dataType: 'json'
+            });
+        }
+    });
+</script>
+{% endblock script %}

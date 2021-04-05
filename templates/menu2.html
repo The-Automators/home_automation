@@ -12,7 +12,7 @@
 {% block content %} {# main content #}
 <div class="container card bg-col mt-3">
     <div class="row p-2 ">
-        <div class="col-12 ">
+        <div class="col-12">
             {% if menu_title == "camera" %} {# this block will work when menu_title is set to camera #}
             <img class="position-relative start-50 translate-middle-x w-75" src="{% url 'video_feed' %}" alt="error">
             {% else %} {# this block will work when menu_title is set to be temperature #}
@@ -27,9 +27,10 @@
 </div>
 {% endblock content %}
 
+{% if menu_title == 'temperature' %}
 {% block script %} {# script for temperature gauge #}
 <script>
-    $(function () {
+    $(document).ready(function () {
         (function () {
             const points = 43;
             const radius = 257;
@@ -53,11 +54,11 @@
                 }
                 if (intStep > digit || (intStep <= digit && intNextStep <= digit)) {
                     styles += `
-                -webkit-transform: rotate(${degree}deg);
-                -moz-transform: rotate(${degree}deg);
-                -ms-transform: rotate(${degree}deg);
-                -o-transform: rotate(${degree}deg);
-                transform: rotate(${degree}deg);`;
+                    -webkit-transform: rotate(${degree}deg);
+                    -moz-transform: rotate(${degree}deg);
+                    -ms-transform: rotate(${degree}deg);
+                    -o-transform: rotate(${degree}deg);
+                    transform: rotate(${degree}deg);`;
                 } else {
                     if (intNextStep > digit)
                         styles += `
@@ -116,3 +117,4 @@
     });
 </script>
 {% endblock script %} 
+{% endif %}
