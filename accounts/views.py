@@ -3,15 +3,15 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 
 # Create your views here.
-def login(req):
-    if req.user.is_authenticated: return redirect('home')
-    if req.method == 'POST':
-        username = req.POST['username']
-        password = req.POST['password']
+def login(request):
+    if request.user.is_authenticated: return redirect('home')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
         if user is not None:
-            auth.login(req, user)
+            auth.login(request, user)
             return redirect('home')
-        messages.info(req, 'Invalid Credentials!!!')
+        messages.info(request, 'Invalid Credentials!!!')
         return redirect('/')
-    return render(req, 'login.html')
+    return render(request, 'login.html')

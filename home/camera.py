@@ -11,8 +11,8 @@ face_detection_data = cv2.CascadeClassifier(os.path.join(settings.BASE_DIR, 'sta
 #################################################################################
 
 class VideoCapture(object):
-    def __init__(self):
-        self.video = cv2.VideoCapture(0)
+    def __init__(self, id):
+        self.video = cv2.VideoCapture(id)
     
     def __del__(self):
         self.video.release()

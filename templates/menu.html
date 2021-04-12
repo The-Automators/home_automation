@@ -35,10 +35,8 @@
 {% endblock content %}
 
 {% block script %}
-{# check function for initialy update the view from database #}
 <script>
     $('#parent').on('click', (e)=>{
-        //console.log(e.target.tagName);
         if(e.target.tagName==="INPUT" || e.target.tagName ==='IMG') {
             var ele_id = e.target.id;
             if(e.target.tagName==="INPUT"){
