@@ -24,16 +24,16 @@ def home(request):
 @redirect_decorator
 def menu(request, id):
     if id in ['bulb', 'door', 'fan', 'ac']:
-        if id == 'bulb': 
+        if id == 'bulb':
             row = Device.objects.exclude(bulb = -1)
             data = ["checked" if x.bulb == 1 else "" for x in row]
-        elif id == 'door': 
+        elif id == 'door':
             row = Device.objects.exclude(door = -1)
             data = ["checked" if x.door == 1 else "" for x in row]
-        elif id == 'fan': 
+        elif id == 'fan':
             row = Device.objects.exclude(fan = -1)
             data = ["checked" if x.fan == 1 else "" for x in row]
-        elif id == 'ac': 
+        elif id == 'ac':
             row = Device.objects.exclude(ac = -1)
             data = ["checked" if x.ac == 1 else "" for x in row]
         room = [x.room for x in row]
@@ -50,19 +50,19 @@ def data(request, id):
     status = request.GET['status']
     value = 1 if status == 'true' else 0
     obj = Device.objects.get(id=_id)
-    if id == 'bulb': 
+    if id == 'bulb':
         obj.bulb = value
         # add Your Code Here for bulb
 
-    elif id == 'door': 
+    elif id == 'door':
         obj.door = value
         # add Your Code Here for door
 
-    elif id == 'fan': 
+    elif id == 'fan':
         obj.fan = value
         # add Your Code Here for fan
 
-    elif id == 'ac': 
+    elif id == 'ac':
         obj.ac = value
         # add Your Code Here for ac
 
@@ -70,18 +70,18 @@ def data(request, id):
     print(id, _id, status, obj.bulb, obj.door, obj.fan, obj.ac)
     return redirect(f'/home/menu/{id}')
 
-# generating camera frame 
+# generating camera frame
 def gen(cam):
-    while True: 
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' 
+    while True:
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n'
                 + cam.get_frame() + b'\r\n\r\n')
 
 # sending camera feed back
 def video_feed(request):
-    return StreamingHttpResponse(gen(VideoCapture(0)), 
+    return StreamingHttpResponse(gen(VideoCapture(0)),
                 content_type='multipart/x-mixed-replace; boundary=frame')
 
-# user logout 
+# user logout
 def logout(request):
     auth.logout(request)
     return redirect('/')
